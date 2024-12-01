@@ -1,17 +1,25 @@
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors');
 const {Server} = require('socket.io');
 const http = require('http');
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server);
-const signup = require('./routes/signup');
+const io = new Server(server, {
+    cors : {
+        origin: process.env.CLIENT_URL,
+        methods: ['GET','POST']
+    }
+});
 
-app.use('/signup', signup);
-const port = process.env.PORT;
+app.use(cors({
+    origin: process.env.CLIENT_URL,
+    methods: ['GET', 'POST']
+}));
+app.use('/signup', require('./routes/signup'));
 
-server.listen(port, () =>{
-    console.log(`server running at ${port}`)
+server.listen(process.env.PORT, () =>{
+    console.log(`server running at ${process.env.PORT}`)
 });
 
 module.exports = {io}
