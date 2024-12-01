@@ -5,8 +5,15 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
-server.listen(3000, () =>{
-    console.log("server running")
+const signup = require('./routes/signup');
+
+require('dotenv').config();
+
+const port = process.env.PORT;
+
+
+server.listen(port, () =>{
+    console.log(`server running at ${port}`)
 });
 
 module.exports = {io}
