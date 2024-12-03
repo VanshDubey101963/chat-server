@@ -12,6 +12,8 @@ const registerUser = async (req,res) => {
     }).then(
         console.log("user created")
     )
+
+    res.send(200);
 }
 
 module.exports = {registerUser}
