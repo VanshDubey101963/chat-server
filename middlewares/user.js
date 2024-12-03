@@ -12,11 +12,12 @@ const checkUser = async (req, res, next) => {
         ]
     })
 
-    if(registeredUser.length != 0)
+    if(registeredUser.length > 0)
     {
         res.status(400).send({
             message: 'user already exists',
         })
+        return;
     }
     
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -26,7 +27,10 @@ const checkUser = async (req, res, next) => {
         res.status(400).send({
             message: 'invalid email'
         })
+        return;
     }
+
+    console.log("reached middleware")
 
     next();
 }
