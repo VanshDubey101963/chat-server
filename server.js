@@ -4,7 +4,6 @@ const express = require('express');
 const cors = require('cors');
 const { Server } = require('socket.io');
 const http = require('http');
-const bodyParser = require('body-parser');
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
@@ -20,6 +19,7 @@ app.use(cors({
 }));
 app.use(express.json())
 app.use('/signup', require('./routes/signup'));
+app.use('/signin', require('./routes/signin'));
 
 server.listen(process.env.PORT, () => {
     console.log(`server running at ${process.env.PORT}`)

@@ -1,9 +1,8 @@
 const user = require("../models/user");
+const jwt = require("jsonwebtoken");
 
 const registerUser = async (req,res) => {
-    const username = req.body.user.username;
-    const email = req.body.user.email;
-    const password = req.body.user.password;
+    const { username, email , password } = req.body.user;
 
     await user.create({
         username: username,
@@ -13,7 +12,34 @@ const registerUser = async (req,res) => {
         console.log("user created")
     )
 
-    res.send(200);
+    res.status(200).send({
+        message: "You're all set! Log in now to begin your Highnest journey."
+    })
 }
 
-module.exports = {registerUser}
+const loginUser = (req, res) => {
+    const { username, password } = req.body.user;
+
+    const secretKey = process.env.SECRET_KEY;
+
+    const token = jwt.sign({
+        username: username,
+        password: password
+    }, secretKey , {expiresIn: '7d'});
+
+    res.status(200).send({
+        token: token,
+        message: "Login Successful"
+    })
+}
+
+const getUser = (req,res) => {
+    console.log("reached here")
+    const user = req.user;
+
+    res.json({
+        user: user
+    })
+}
+
+module.exports = {registerUser, loginUser , getUser }
