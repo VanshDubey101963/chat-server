@@ -6,4 +6,4 @@ This repo contains code for chat-web server
 - npm i
 
 # setup an .env file 
-- add PORT , CLIENT_URL , SECRET_KEY
+- add PORT , CLIENT_URL , SECRET_KEY, MONGO_URL

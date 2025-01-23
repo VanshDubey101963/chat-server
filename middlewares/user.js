@@ -55,10 +55,9 @@ const checkLoginUser = async (req, res, next) => {
 
 const checkToken = (req,res,next) => {
     const token = req.headers['authorization'].split(' ')[1];
-    console.log(token);
     const secretKey = process.env.SECRET_KEY;
 
-    jwt.verify(token , secretKey, (err, user)=>{
+    jwt.verify(token , secretKey, (err, userID)=>{
         if(err)
         {
             res.status(401).send({
@@ -68,7 +67,7 @@ const checkToken = (req,res,next) => {
             return;
         }
 
-        req.user = user;
+        req.userID = userID;
 
         
         next();

@@ -15,9 +15,24 @@ const userSchema = mongoose.Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+
+    avatar: {
+        type: String
+    },
+
+    socketID : {
+        type: String
+    },
+
+    friends : [
+        {
+            type: mongoose.Schema.ObjectId
+        }
+    ],
+
 });
 
-const user = mongoose.model('user',userSchema);
+const user = mongoose.model('User',userSchema);
 
 module.exports = user
