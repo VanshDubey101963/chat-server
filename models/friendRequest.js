@@ -2,15 +2,15 @@ const mongoose = require('mongoose')
 
 
 const requestSchema = new mongoose.Schema({
-    sender:{
+    sender: {
         type: mongoose.Schema.ObjectId,
-        ref: 'User'
+        ref: 'users'
     },
     recipient: {
         type: mongoose.Schema.ObjectId,
-        ref: 'User'
+        ref: 'users'
     }
 })
 
-const friendRequest = new mongoose.model("FriendRequest", requestSchema);
-module.exports = {friendRequest};
+const friendRequest = new mongoose.model("friendrequests", requestSchema);
+module.exports = { friendRequest };

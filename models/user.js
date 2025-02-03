@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const userSchema = mongoose.Schema({
     username: {
         type: String,
@@ -21,18 +22,24 @@ const userSchema = mongoose.Schema({
         type: String
     },
 
-    socketID : {
+    socketID: {
         type: String
     },
 
-    friends : [
+    isOnline: {
+        type: Boolean,
+        default: false,
+    },
+
+    friends: [
         {
-            type: mongoose.Schema.ObjectId
+            type: mongoose.Schema.ObjectId,
+            ref: 'users'
         }
     ],
 
 });
 
-const user = mongoose.model('User',userSchema);
+const user = mongoose.model('users', userSchema);
 
 module.exports = user
