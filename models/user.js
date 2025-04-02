@@ -18,6 +18,10 @@ const userSchema = mongoose.Schema({
         required: true
     },
 
+    description:{
+        type: String
+    },
+
     avatar: {
         type: String
     },
